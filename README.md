@@ -16,6 +16,7 @@ You can schedule a read on GetNext() to run 2 times with an interval of 10 secon
     var consumer = new Consumer();
     consumer.Poll(x=>x.GetNext()).Every(5.Seconds()).For(2.Times()).WithCallback(x=>list.Add(x)).Start(); //blocking
 
+The default amount of time that a statement will run is 1 time, unless the For(Times) statement is added.
 The Do() method here is blocking. If you want to do the same thing asynchronously, simply add Async() and it will now longer block.
 
     consumer.Poll(x=>x.GetNext()).Async().Every(5.Seconds()).For(2.Times()).WithCallback(x=>list.Add(x)).Start();
@@ -32,4 +33,6 @@ Now if you have this polling occuring asynchronously, you will more than likely 
     
     Thread.Sleep(5.Seconds());
     var listCount = list.Count; // this will still be 1
+
+The While() statement takes precident over the For(Times) statement. In the event that the For(Times) is not specified and a While() statement is included, it will run indefinitely until the predicate passed into the While() is false.
     
