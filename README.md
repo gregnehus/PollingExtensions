@@ -24,12 +24,12 @@ Now if you have this polling occuring asynchronously, you will more than likely 
     
     var shouldBeRunning = true;
     consumer.Poll(x=>x.GetNext()).Async().Every(5.Seconds()).For(2.Times()).WithCallback(x=>list.Add(x)).While(()=>shouldBeRunning).Start();
+    
     Thread.Sleep(5.Seconds());
-
     var listCount = list.Count; // there will be 1 item in here as the interval is 5 seconds
     
     shouldBeRunning = false; // this stops the polling
+    
     Thread.Sleep(5.Seconds());
-
     var listCount = list.Count; // this will still be 1
     
