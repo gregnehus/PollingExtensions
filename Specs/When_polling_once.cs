@@ -15,5 +15,4 @@ namespace Specs
         static readonly Producer Producer = new Producer();
         static readonly List<int> Results = new List<int>();
     }
-    
 }

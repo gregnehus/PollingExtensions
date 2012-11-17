@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -47,9 +48,7 @@ namespace PollExtensions
 
         public PollSettings<T> Do(Times times)
         {
-            var result = Action();
-
-            _handlers.ForEach(x => x(result));
+            Enumerable.Repeat(0,times.Value).ToList().ForEach(x=> Do());
             return this;
         }
 

@@ -17,7 +17,7 @@ namespace PollExtensions
     public class Times
     {
         public int Value { get; private set; }
-
+        
         public Times(int value)
         {
             Value = value;
