@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PollExtensions", "PollingExtensions\PollExtensions.csproj", "{A4D4AB7A-9590-41F6-A64D-C2AE6B589076}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5A377B92-7DA3-49B0-BBDB-343E0BEF28DB}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specs", "Specs\Specs.csproj", "{ED77E9B0-C113-4598-BDE6-8DDE930F29F2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A4D4AB7A-9590-41F6-A64D-C2AE6B589076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4D4AB7A-9590-41F6-A64D-C2AE6B589076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4D4AB7A-9590-41F6-A64D-C2AE6B589076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4D4AB7A-9590-41F6-A64D-C2AE6B589076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED77E9B0-C113-4598-BDE6-8DDE930F29F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED77E9B0-C113-4598-BDE6-8DDE930F29F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED77E9B0-C113-4598-BDE6-8DDE930F29F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED77E9B0-C113-4598-BDE6-8DDE930F29F2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
