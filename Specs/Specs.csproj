@@ -61,6 +61,8 @@
   <ItemGroup>
     <Compile Include="When_polling_once.cs" />
     <Compile Include="When_polling_twice.cs" />
+    <Compile Include="When_polling_twice_asynchronously.cs" />
+    <Compile Include="When_polling_twice_asynchronously_with_while_predicate_that_expires_before_times.cs" />
     <Compile Include="When_requesting_for_first_time.cs" />
     <Compile Include="When_requesting_for_second_time.cs" />
     <Compile Include="With.cs" />

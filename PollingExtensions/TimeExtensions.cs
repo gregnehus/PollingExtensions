@@ -6,7 +6,7 @@ namespace PollExtensions
     {
         public static TimeSpan Seconds(this int seconds)
         {
-            return new TimeSpan(0,0,0,1);
+            return new TimeSpan(0, 0, 0, seconds);
         }
 
         public static Times Times(this int times)
