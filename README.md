@@ -14,6 +14,6 @@ You can schedule a read on GetNext() to run 2 times with an interval of 10 secon
 
     var list = new List<int>();
     var consumer = new Consumer();
-    consumer.Poll(x=>x.GetNext()).Every(5.Seconds()).WithHandler(x=>list.Add(x)).Do(2.Times());
-    // no blocking
-    Thread.Sleep(10.Seconds());
+    consumer.Poll(x=>x.GetNext()).Every(5.Seconds()).WithHandler(x=>list.Add(x)).Do(2.Times()); //blocking
+
+The Do() method is blocking. Soon there will be asynchronous functionality.
