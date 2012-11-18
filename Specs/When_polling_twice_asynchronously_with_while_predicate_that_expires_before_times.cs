@@ -11,7 +11,7 @@ namespace Specs
     {
         Because of = () =>
                      {
-                         Producer.Poll(x => x.GetNext()).Async().Every(2.Seconds()).While(() => _shouldRun).WithCallback(x => Results.Add(x)).For(2.Times()).Start();
+                         Producer.Poll(x => x.GetNext()).Every(2.Seconds()).While(() => _shouldRun).WithCallback(x => Results.Add(x)).For(2.Times()).Start();
  
                          Thread.Sleep(2.Seconds());
                          _shouldRun = false;

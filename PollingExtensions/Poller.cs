@@ -23,7 +23,7 @@ namespace PollExtensions
         bool _isRunning;
 
         int _times = 1;
-        bool _isAsync;
+        bool _isAsync = true;
         
 
         public PollSettings<T> Every(TimeSpan time)
@@ -34,20 +34,6 @@ namespace PollExtensions
         public PollSettings<T> WithCallback(Action<T> handler)
         {
             _handlers.Add(handler);
-            return this;
-        }
-
-        public PollSettings<T> DoUntil(Func<bool> predicate)
-        {
-            _isRunning = true;
-            Task.Factory.StartNew(() =>
-            {
-                while (!predicate() && _isRunning)
-                {
-                    Thread.Sleep(_interval);
-                    Start();
-                }
-            });
             return this;
         }
 
@@ -85,9 +71,9 @@ namespace PollExtensions
             _handlers.ForEach(x => x(result));
         }
 
-        public PollSettings<T> Async()
+        public PollSettings<T> Blocking()
         {
-            _isAsync = true;
+            _isAsync = false;
             return this;
         } 
        

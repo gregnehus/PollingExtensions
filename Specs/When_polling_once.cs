@@ -6,7 +6,7 @@ using PollExtensions;
 
 namespace Specs
 {
-    [Subject(typeof(Poller))]
+    [Subject("Blocking")]
     public class When_polling_once
     {
         Because of = () => Producer.Poll(x => x.GetNext()).WithCallback(x => Results.Add(x)).For(1.Times()).Start();

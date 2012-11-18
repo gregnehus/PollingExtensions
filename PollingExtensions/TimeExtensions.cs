@@ -9,6 +9,11 @@ namespace PollExtensions
             return new TimeSpan(0, 0, 0, seconds);
         }
 
+        public static TimeSpan Milliseconds(this int milliseconds)
+        {
+            return new TimeSpan(0, 0, 0, 0, milliseconds);
+        }
+
         public static Times Times(this int times)
         {
             return new Times(times);

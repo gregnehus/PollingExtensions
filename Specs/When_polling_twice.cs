@@ -5,10 +5,10 @@ using PollExtensions;
 
 namespace Specs
 {
-    [Subject(typeof(Poller))]
+    [Subject("Blocking")]
     public class When_polling_twice
     {
-        Because of = () => Producer.Poll(x => x.GetNext()).WithCallback(x => Results.Add(x)).For(2.Times()).Start();
+        Because of = () => Producer.Poll(x => x.GetNext()).Blocking().WithCallback(x => Results.Add(x)).For(2.Times()).Start();
 
         It should_have_two_results = () => Results.Count.ShouldEqual(2);
         It should_have_first_value = () => Results.First().ShouldEqual(0);
