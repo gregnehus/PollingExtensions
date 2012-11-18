@@ -13,10 +13,10 @@ namespace Specs
         Because of = () =>
                      {
                          var start = DateTime.Now;
-                         Producer.Poll(x => x.GetNext()).Every(2.Seconds()).WithCallback(x => Results.Add(x)).For(2.Times()).Start();
+                         Producer.Poll(x => x.GetNext()).Every(2.Milliseconds()).WithCallback(x => Results.Add(x)).For(2.Times()).Start();
                          _hasItemsAfterCall = Results.Count > 0;
                          _time = DateTime.Now - start;
-                         Thread.Sleep(4.Seconds());
+                         Thread.Sleep(4.Milliseconds());
                      };
 
         It should_not_block = () => _time.ShouldBeLessThan(1.Seconds());
