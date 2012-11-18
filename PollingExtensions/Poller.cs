@@ -22,7 +22,7 @@ namespace PollExtensions
         Func<bool> _predicate = () => true;
         bool _isRunning;
 
-        int _times = 1;
+        int? _times;
         bool _isAsync = true;
         
 
@@ -49,7 +49,15 @@ namespace PollExtensions
         } 
         public PollSettings<T> Start()
         {
-            Action action = () => Enumerable.Repeat(0, _times).ToList().ForEach(x => Do());
+            Action action = (_times.HasValue)
+                                ? () => Enumerable.Repeat(0, _times.Value).ToList().ForEach(x => Do())
+                                : (Action) (() =>
+                                            {
+                                                while (_predicate())
+                                                {
+                                                    Do();
+                                                }
+                                            });
 
             if (_isAsync)
             {

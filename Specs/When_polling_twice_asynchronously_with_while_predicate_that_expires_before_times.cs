@@ -6,8 +6,8 @@ using PollExtensions;
 
 namespace Specs
 {
-    [Subject(typeof(Poller))]
-    public class When_polling_twice_asynchronously_with_while_predicate_that_expires_before_times
+    [Subject("Asynchronous")]
+    public class When_polling_twice_with_while_predicate_that_expires_before_times
     {
         Because of = () =>
                      {
