@@ -3,6 +3,16 @@ PollingExtensions
 
 This library makes it a breeze to schedule a repeated action with handlers
 
+Expressions
+-----------
+    Poll(Func<TARGETCLASS, RETURNTYPE>) - extension method off of any object that sets up the method to poll
+	Every(Timespan) - Sets the interval
+	For(Times) - How many times to poll (default is 1)
+	WithCallback(Action<RETURNTYPE>) - Add a callback handler
+	Blocking() - Makes the polling expression blocking i.e. it doesn't run in its own thread
+	Start() - starts the polling
+	Stop() - stops the polling
+
 For instance, if you have a Producer like so:
 
     class Consumer

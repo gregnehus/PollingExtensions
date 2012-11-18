@@ -11,9 +11,9 @@ namespace Specs
     {
         Because of = () =>
                      {
-                         Producer.Poll(x => x.GetNext()).Every(2.Milliseconds()).While(() => _shouldRun).WithCallback(x => Results.Add(x)).For(2.Times()).Start();
+                         Producer.Poll(x => x.GetNext()).Every(20.Milliseconds()).While(() => _shouldRun).WithCallback(x => Results.Add(x)).For(2.Times()).Start();
 
-                         Thread.Sleep(2.Milliseconds());
+                         Thread.Sleep(20.Milliseconds());
                          _shouldRun = false;
                      };
 
@@ -22,6 +22,22 @@ namespace Specs
         
         static readonly Producer Producer = new Producer();
         static bool _shouldRun = true;
+        static readonly List<int> Results = new List<int>();
+    }
+
+    [Subject("Asynchronous")]
+    public class When_polling_and_stopping_before_times_elapsed{
+        Because of = () =>
+        {
+            var settings = Producer.Poll(x => x.GetNext()).Every(200.Milliseconds()).WithCallback(x => Results.Add(x)).For(20.Times()).Start();
+
+            Thread.Sleep(2000.Milliseconds());
+            settings.Stop();
+        };
+
+        It should_have_10_results = () => Results.Count.ShouldEqual(10);
+
+        static readonly Producer Producer = new Producer();
         static readonly List<int> Results = new List<int>();
     }
 }

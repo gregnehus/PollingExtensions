@@ -7,7 +7,7 @@ using PollExtensions;
 
 namespace Specs
 {
-    [Subject(typeof(Poller))]
+    [Subject("Asynchronous")]
     public class When_polling_twice_asynchronously
     {
         Because of = () =>

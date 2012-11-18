@@ -8,9 +8,9 @@ namespace PollExtensions
 {
     public static class Poller
     {
-        public static PollSettings<T> Poll<TF, T>(this TF obj, Func<TF, T> read)
+        public static PollSettings<RETURNTYPE> Poll<TARGETCLASS, RETURNTYPE>(this TARGETCLASS obj, Func<TARGETCLASS, RETURNTYPE> read)
         {
-            return new PollSettings<T> { Action = () => read(obj) };
+            return new PollSettings<RETURNTYPE> { Action = () => read(obj) };
         }
     }
 
@@ -20,9 +20,11 @@ namespace PollExtensions
         TimeSpan _interval = 0.Seconds();
         readonly List<Action<T>> _handlers = new List<Action<T>>();
         Func<bool> _predicate = () => true;
-        bool _isRunning;
+        bool _wasStopped;
 
-        int? _times;
+        int _times = 1;
+        bool _useTimes;
+        bool _usePredicate;
         bool _isAsync = true;
         
 
@@ -40,17 +42,29 @@ namespace PollExtensions
         public PollSettings<T> While(Func<bool> predicate)
         {
             _predicate = predicate;
+            _usePredicate = true;
             return this;
         } 
         public PollSettings<T> For(Times times)
         {
             _times = times.Value;
+            _useTimes = true;
             return this;
         } 
         public PollSettings<T> Start()
         {
-            Action action = (_times.HasValue)
-                                ? () => Enumerable.Repeat(0, _times.Value).ToList().ForEach(x => Do())
+            _wasStopped = false;
+            var action = (_useTimes || !_usePredicate)
+                                ? () =>
+                                  {
+                                      for (var x = 0; x<_times; x++)
+                                      {
+                                          if (_wasStopped)
+                                              break;
+                                          Do();
+                                      }
+                                      
+                                  }
                                 : (Action) (() =>
                                             {
                                                 while (_predicate())
@@ -74,9 +88,10 @@ namespace PollExtensions
             if (!_predicate())
                 return;
 
-            Thread.Sleep(_interval);
+            
             var result = Action();
             _handlers.ForEach(x => x(result));
+            Thread.Sleep(_interval);
         }
 
         public PollSettings<T> Blocking()
@@ -87,7 +102,7 @@ namespace PollExtensions
        
         public PollSettings<T> Stop()
         {
-            _isRunning = false;
+            _wasStopped = false;
             return this;
         }
     }
